@@ -1,4 +1,5 @@
 from django.contrib import admin
+<<<<<<< HEAD
 from .models import Question, Choice
 
 
@@ -21,3 +22,10 @@ class QuestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
+=======
+
+from django.contrib import admin
+from .models import Question
+
+admin.site.register(Question)
+>>>>>>> 7b1b60e9d984d2bf747492ba2561eaaecc70ecc4

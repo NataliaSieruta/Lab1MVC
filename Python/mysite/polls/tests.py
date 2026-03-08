@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import datetime
 from django.urls import reverse
 from django.test import TestCase
@@ -78,3 +79,8 @@ class QuestionIndexViewTests(TestCase):
             response.context["latest_question_list"],
             [question],
         )
+=======
+from django.test import TestCase
+
+# Create your tests here.
+>>>>>>> 7b1b60e9d984d2bf747492ba2561eaaecc70ecc4
