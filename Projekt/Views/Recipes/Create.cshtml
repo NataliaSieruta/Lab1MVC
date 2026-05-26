@@ -1,0 +1,76 @@
+﻿@model RecipeApp.ViewModels.RecipeCreateViewModel
+
+<h1>Dodaj przepis</h1>
+
+<form asp-action="Create" method="post">
+
+    <!-- NAZWA -->
+    <div>
+        <label>Nazwa</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <br />
+
+    <!-- INSTRUKCJE -->
+    <div>
+        <label>Instrukcje</label>
+        <textarea asp-for="Instructions" class="form-control"></textarea>
+    </div>
+
+    <br />
+
+    <!-- KATEGORIA -->
+    <div>
+        <label>Kategoria</label>
+        <select asp-for="CategoryId" class="form-control">
+            <option value="">-- wybierz --</option>
+            @foreach (var c in Model.Categories)
+            {
+                <option value="@c.Id">@c.Name</option>
+            }
+        </select>
+    </div>
+
+    <br />
+
+    <!-- SKŁADNIKI -->
+    <h3>Składniki</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Składnik</th>
+                <th>Ilość</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (int i = 0; i < Model.Ingredients.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <select name="SelectedIngredientIds" class="form-control">
+                            <option value="@Model.Ingredients[i].Id">
+                                @Model.Ingredients[i].Name
+                            </option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <input name="Quantities"
+                               class="form-control"
+                               placeholder="np. 200g / 2 szt." />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">
+        Zapisz
+    </button>
+
+</form>

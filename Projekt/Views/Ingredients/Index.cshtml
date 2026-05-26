@@ -1,0 +1,10 @@
+﻿@model List<RecipeApp.Models.Ingredient>
+
+<h1>Składniki</h1>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>@item.Name</li>
+    }
+</ul>

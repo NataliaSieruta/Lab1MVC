@@ -1,0 +1,87 @@
+﻿@model IEnumerable<RecipeApp.Models.Recipe>
+<div class="container mt-4">
+<h1 class="mb-4 text-center">
+    Lista przepisów
+    </h1>
+
+<form method="get" asp-action="Index">
+    <div class="d-flex gap-2 mb-3">
+        <input type="text"
+               name="searchString"
+               class="form-control"
+               placeholder="Szukaj przepisu..." />
+
+        <button type="submit" class="btn btn-primary">
+            🔍 Szukaj
+        </button>
+    </div>
+</form>
+
+<br />
+
+<a asp-action="Create" class="btn btn-success">
+    ➕ Dodaj przepis
+</a>
+
+<br />
+<br />
+
+<table class="table table-hover table-striped shadow rounded">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Kategoria</th>
+            <th>Instrukcje</th>
+            <th>Składniki</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><strong>@item.Name</strong></td>
+
+                <td>@item.Category?.Name</td>
+
+                <td style="max-width: 300px;">
+                    @if (!string.IsNullOrWhiteSpace(item.Instructions))
+                    {
+                        @item.Instructions
+                    }
+                    else
+                    {
+                        <span>Brak instrukcji</span>
+                    }
+                </td>
+
+                <td>
+                    @if (item.RecipeIngredients != null && item.RecipeIngredients.Any())
+                    {
+                        @foreach (var ri in item.RecipeIngredients)
+                        {
+                            <div>
+                                @ri.Ingredient?.Name (@ri.Quantity)
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <span>Brak składników</span>
+                    }
+                </td>
+
+                <td>
+                    <a asp-action="Delete"
+                       asp-route-id="@item.Id"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Na pewno usunąć przepis?')">
+                        🗑 Usuń
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
